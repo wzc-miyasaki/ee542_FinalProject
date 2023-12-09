@@ -1,6 +1,11 @@
 # ee542_FinalProject
 
+Our final project materials include the following files:
 
+- front-end source code can be found under folder `frontEnd/`
+- node-red JSON file for Android Phone, Gateway, and Host laptop can be found under folder `node-red-code/`
+- xDot BIN files can be found under the folder `xDot_Bin_Files`  
+- Details of our IoT device setup will be presented inside README file here. 
 
 
 
