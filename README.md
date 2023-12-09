@@ -1,5 +1,7 @@
 # ee542_FinalProject
 
+**Team 5 Members**:  Zecheng Wang,  Ruiyang Liu, Hanrui Cheng
+
 Our final project materials include the following files:
 
 - front-end source code can be found under folder `frontEnd/`
