@@ -58,6 +58,10 @@ The following image shows the coding part of the data transmission.
 ##### Android Phone
 ![image](https://github.com/wzc-miyasaki/ee542_FinalProject/assets/45318227/6dffe9f2-ecb8-446e-bf43-f44c6bd62365)
 
+##### Gateway
+![Screenshot (34)](https://github.com/wzc-miyasaki/ee542_FinalProject/assets/45318227/c381a89c-cf37-4f5a-9633-e5cf1f1e5a26)
+
+
 
   ##  Frontend
 
