@@ -1,0 +1,297 @@
+[
+    {
+        "id": "c12e9e18.651ae",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "bec0b05.54ba45",
+        "type": "inject",
+        "z": "c12e9e18.651ae",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 220,
+        "wires": [
+            [
+                "a9c3b25c.f6cc1"
+            ]
+        ]
+    },
+    {
+        "id": "a9c3b25c.f6cc1",
+        "type": "exec",
+        "z": "c12e9e18.651ae",
+        "command": "sh takephoto.sh",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 400,
+        "y": 200,
+        "wires": [
+            [],
+            [],
+            [
+                "fs_ops_dir"
+            ]
+        ]
+    },
+    {
+        "id": "08a9800d37ee9849",
+        "type": "http in",
+        "z": "c12e9e18.651ae",
+        "name": "",
+        "url": "/takePic",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 230,
+        "y": 380,
+        "wires": [
+            [
+                "a9c3b25c.f6cc1",
+                "216a5cad31cc754a"
+            ]
+        ]
+    },
+    {
+        "id": "216a5cad31cc754a",
+        "type": "http response",
+        "z": "c12e9e18.651ae",
+        "name": "http response",
+        "statusCode": "202",
+        "headers": {},
+        "x": 540,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "ed8e1a372263d317",
+        "type": "http request",
+        "z": "c12e9e18.651ae",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.170:1880/recvPic",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1360,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "702e138bb6360694",
+        "type": "file in",
+        "z": "c12e9e18.651ae",
+        "name": "read Image",
+        "filename": "filename",
+        "filenameType": "msg",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 950,
+        "y": 320,
+        "wires": [
+            [
+                "6e4951d8969ca566",
+                "b8fe9682b627f90b"
+            ]
+        ]
+    },
+    {
+        "id": "6e4951d8969ca566",
+        "type": "debug",
+        "z": "c12e9e18.651ae",
+        "name": "checkPayload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1160,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "b8fe9682b627f90b",
+        "type": "change",
+        "z": "c12e9e18.651ae",
+        "name": "Set Header",
+        "rules": [
+            {
+                "t": "set",
+                "p": "headers.content-type",
+                "pt": "msg",
+                "to": "image/jpeg",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1190,
+        "y": 320,
+        "wires": [
+            [
+                "ed8e1a372263d317",
+                "c202cdae8111deca"
+            ]
+        ]
+    },
+    {
+        "id": "fs_ops_dir",
+        "type": "fs-ops-dir",
+        "z": "c12e9e18.651ae",
+        "name": "List Files",
+        "path": "/data/data/com.termux/files/home/pictures",
+        "pathType": "str",
+        "filter": "",
+        "filterType": "str",
+        "dir": "payload",
+        "dirType": "msg",
+        "x": 580,
+        "y": 80,
+        "wires": [
+            [
+                "find_latest_file"
+            ]
+        ]
+    },
+    {
+        "id": "find_latest_file",
+        "type": "function",
+        "z": "c12e9e18.651ae",
+        "name": "Find Latest File",
+        "func": "let files = msg.payload;\nfiles.sort();\nmsg.payload = files[files.length - 1];\nlet filename = \"/data/data/com.termux/files/home/pictures/\" + msg.payload;\nmsg = {\n    \"payload\": msg.payload,\n    \"filename\": filename\n};\n//return msg;\nsetTimeout(function() {\n    node.send(msg);\n}, 1500);\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 180,
+        "wires": [
+            [
+                "output",
+                "702e138bb6360694"
+            ]
+        ]
+    },
+    {
+        "id": "output",
+        "type": "debug",
+        "z": "c12e9e18.651ae",
+        "name": "Output",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "filename",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 980,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "c202cdae8111deca",
+        "type": "http request",
+        "z": "c12e9e18.651ae",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "a1so1lnmym1kmj-ats.iot.us-west-2.amazonaws.com:8443/topics/finalProject/pic?qos=1",
+        "tls": "3b4ebf482ed1257a",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1420,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cf5af3adb20d236f",
+        "type": "inject",
+        "z": "c12e9e18.651ae",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1110,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3b4ebf482ed1257a",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "0b0011b04b6a6a13dfae1c181540c788868ef4ab6aac13e8f9cf34050747649a-certificate.pem.crt",
+        "keyname": "0b0011b04b6a6a13dfae1c181540c788868ef4ab6aac13e8f9cf34050747649a-private.pem.key",
+        "caname": "AmazonRootCA1.pem",
+        "servername": "",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    }
+]
