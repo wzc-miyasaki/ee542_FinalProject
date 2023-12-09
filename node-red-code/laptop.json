@@ -1,0 +1,254 @@
+[
+    {
+        "id": "8c3dca1e4bfbe8b5",
+        "type": "tab",
+        "label": "流程 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "64cb82422f24556a",
+        "type": "http request",
+        "z": "8c3dca1e4bfbe8b5",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.142:1880/takePic",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 610,
+        "y": 320,
+        "wires": [
+            [
+                "e13dea65fd4f6d39"
+            ]
+        ]
+    },
+    {
+        "id": "ee393e61f56e419d",
+        "type": "inject",
+        "z": "8c3dca1e4bfbe8b5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 320,
+        "wires": [
+            [
+                "64cb82422f24556a"
+            ]
+        ]
+    },
+    {
+        "id": "e13dea65fd4f6d39",
+        "type": "debug",
+        "z": "8c3dca1e4bfbe8b5",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "receive_http",
+        "type": "http in",
+        "z": "8c3dca1e4bfbe8b5",
+        "name": "Receive Image",
+        "url": "/recvPic",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 240,
+        "y": 580,
+        "wires": [
+            [
+                "169fc710328d6125",
+                "c202cdae8111deca",
+                "save_file",
+                "636e10e35fc110aa",
+                "38af1bbbab87bb0b"
+            ]
+        ]
+    },
+    {
+        "id": "save_file",
+        "type": "file",
+        "z": "8c3dca1e4bfbe8b5",
+        "name": "Save Image",
+        "filename": "/Users/ruiyangliu/image.jpg",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 650,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "169fc710328d6125",
+        "type": "debug",
+        "z": "8c3dca1e4bfbe8b5",
+        "name": "recvImg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "b646e408e9769097",
+        "type": "http request",
+        "z": "8c3dca1e4bfbe8b5",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "a1so1lnmym1kmj-ats.iot.us-west-2.amazonaws.com:8443/topics/finalProject/windSensor?qos=1",
+        "tls": "3b4ebf482ed1257a",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 640,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3d85129c924189ce",
+        "type": "http in",
+        "z": "8c3dca1e4bfbe8b5",
+        "name": "Recv Wind Data",
+        "url": "/windSensor",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 220,
+        "y": 440,
+        "wires": [
+            [
+                "418ff2d7afca62df",
+                "38af1bbbab87bb0b",
+                "b646e408e9769097"
+            ]
+        ]
+    },
+    {
+        "id": "418ff2d7afca62df",
+        "type": "debug",
+        "z": "8c3dca1e4bfbe8b5",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "38af1bbbab87bb0b",
+        "type": "http response",
+        "z": "8c3dca1e4bfbe8b5",
+        "name": "Respond",
+        "statusCode": "202",
+        "headers": {},
+        "x": 500,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "c202cdae8111deca",
+        "type": "http request",
+        "z": "8c3dca1e4bfbe8b5",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "a1so1lnmym1kmj-ats.iot.us-west-2.amazonaws.com:8443/topics/finalProject/pic?qos=1",
+        "tls": "3b4ebf482ed1257a",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 640,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "636e10e35fc110aa",
+        "type": "amazon s3 out",
+        "z": "8c3dca1e4bfbe8b5",
+        "aws": "",
+        "bucket": "lab9bkt",
+        "filename": "ee542DemoTest.jpg",
+        "localFilename": "",
+        "region": "us-west-2",
+        "name": "",
+        "x": 830,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "3b4ebf482ed1257a",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "0b0011b04b6a6a13dfae1c181540c788868ef4ab6aac13e8f9cf34050747649a-certificate.pem.crt",
+        "keyname": "0b0011b04b6a6a13dfae1c181540c788868ef4ab6aac13e8f9cf34050747649a-private.pem.key",
+        "caname": "AmazonRootCA1.pem",
+        "servername": "",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    }
+]
