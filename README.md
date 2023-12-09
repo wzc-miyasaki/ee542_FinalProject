@@ -52,3 +52,5 @@ The following image shows the coding part of the data transmission.
 
 
 
+##### Android Phone Node-Red Implementation
+![image](https://github.com/wzc-miyasaki/ee542_FinalProject/assets/45318227/6dffe9f2-ecb8-446e-bf43-f44c6bd62365)
