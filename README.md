@@ -1,6 +1,6 @@
 # ee542_FinalProject
 
-**Team 5 Members**:  Zecheng Wang,  Ruiyang Liu, Hanrui Cheng
+**Team 5 Members**:  Zecheng Wang,  Ruiyang Liu, Hanrui Chen
 
 Our final project materials include the following files:
 
