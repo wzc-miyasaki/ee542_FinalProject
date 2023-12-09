@@ -59,4 +59,37 @@ The following image shows the coding part of the data transmission.
 ![image](https://github.com/wzc-miyasaki/ee542_FinalProject/assets/45318227/6dffe9f2-ecb8-446e-bf43-f44c6bd62365)
 
 
-  
+  ##  Frontend
+
+- Using node.js as server to communicate with chatGPT API.
+- Using React as web front end, and send http request to server for AI analysis.
+
+
+
+### How to run?
+
+1. Start the server using `node server.js` at the server directory
+
+2. Start the frontend using `npm start` at the frontend directory
+
+3. If the chatGPT API key expired or has no sufficient fund, replace it with your own API key at `server.js` , Authorization. 
+
+    ![image-20231209141258457](https://cdn.jsdelivr.net/gh/MariOvO-OwO/typoraPhoteo@main/image-20231209141258457.png)
+
+
+
+### How to use the frontend?
+
+![image-20231209143131846](https://cdn.jsdelivr.net/gh/MariOvO-OwO/typoraPhoteo@main/image-20231209143131846.png)
+
+Landing point feedback:
+
+- Using button on the middle `fetch the image` to accquire the most current image of landing point. 
+- Image will be shown at the left box. 
+
+Training record and plan:
+
+- Using middle section to record and sumbit your scores for each training section
+- Then use `Ask for Training plan` to request a AI analyzed current weakness and future training plan. 
+
+![image-20231209143624445](https://cdn.jsdelivr.net/gh/MariOvO-OwO/typoraPhoteo@main/image-20231209143624445.png)
