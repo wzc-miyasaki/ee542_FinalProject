@@ -1,0 +1,97 @@
+[
+    {
+        "id": "41110159.5790f",
+        "type": "tab",
+        "label": "Flow 2"
+    },
+    {
+        "id": "3415ca1d.d91fce",
+        "type": "lora in",
+        "z": "41110159.5790f",
+        "name": "",
+        "datatype": "utf8",
+        "x": 179,
+        "y": 344,
+        "wires": [
+            [
+                "e1322a7b.29cb98",
+                "a1810286.8670b"
+            ]
+        ]
+    },
+    {
+        "id": "e1322a7b.29cb98",
+        "type": "debug",
+        "z": "41110159.5790f",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 451,
+        "y": 441.74999809265137,
+        "wires": []
+    },
+    {
+        "id": "a1810286.8670b",
+        "type": "http request",
+        "z": "41110159.5790f",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "192.168.1.170:1880/windSensor",
+        "tls": "",
+        "x": 462,
+        "y": 250.5,
+        "wires": [
+            [
+                "d9399e90.4ef63"
+            ]
+        ]
+    },
+    {
+        "id": "d7e063b0.8adbf",
+        "type": "inject",
+        "z": "41110159.5790f",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 167.5,
+        "y": 165,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d9399e90.4ef63",
+        "type": "debug",
+        "z": "41110159.5790f",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 673.5,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "4753f648.7e3418",
+        "type": "http request",
+        "z": "41110159.5790f",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "192.168.1.241:1880/windSensor1",
+        "tls": "",
+        "x": 520,
+        "y": 172,
+        "wires": [
+            [
+                "d9399e90.4ef63"
+            ]
+        ]
+    }
+]
