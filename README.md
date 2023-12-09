@@ -2,6 +2,20 @@
 
 
 
+
+
+### Gateway Setup
+
+Configuring Conduit gateway device is straightfoward here. The tricky part is to manually assign a static IP address for the gateway since you have to make sure both IoT device and gateway are under the same network. 
+
+1. Connect the multi-Tech conduit gateway device to a router through an ethernet cable. Install the antenna on gateway device to enable the wireless communication between it and the xDot devices.
+2. Establish a serial connection between the gateway and a PC via a micro-usb cable. You need to set up a correct IP address first so that you can login to the gateway later through its static IP address. 
+3. On the terminal, using the command `ifconfig eth0 IP_ADDRESS` to modify the IP address of a specific interface. Make sure the IP address you have assigned is under same subnet to which the IoT device is connected.
+4. With that IP address, you can now login to the backend of the conduit on a web browser. You can then assign a permanent static IP address after you login to the gateway. 
+5. After the IP configuration, you need to start the Node-Red running over the gateway. More details will be illustrated in Node-red part.
+
+
+
 ### xDot Setup
 
 In this part, the xDot will be configured to build a connection with Multi-Tech Conduit, a gateway device, for data transmission.  
